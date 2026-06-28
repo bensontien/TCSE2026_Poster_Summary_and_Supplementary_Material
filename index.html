@@ -25,11 +25,21 @@
             padding: 0;
         }
 
-        /* 限制 A4 寬度，確保轉成 PDF 時不跑版 */
         .container {
             max-width: 850px;
             margin: 0 auto;
-            padding: 40px 30px;
+            padding: 40px 20px; /* 稍微縮小內襯，留給手機螢幕更多空間 */
+        }
+
+        /* 當螢幕寬度小於 768px（手機）時的優化 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.4rem; /* 讓題目在手機上不會太大而折行太多 */
+            }
+            pre {
+                font-size: 0.8rem; /* 手機上程式碼字體稍微縮小，更易閱讀 */
+                padding: 12px;
+            }
         }
 
         /* 頁首樣式 */
