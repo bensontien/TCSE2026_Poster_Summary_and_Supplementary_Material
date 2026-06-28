@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCSE 2026 論文摘要與補充資料</title>
+    <style>
+        /* 全局變數與樣式設定 */
+        :root {
+            --primary-color: #0f172a;   /* 深藍底色，展現學術沉穩感 */
+            --secondary-color: #2563eb; /* 科技藍，用於標題強調與連結 */
+            --text-color: #334155;      /* 內文深灰 */
+            --bg-light: #f8fafc;        /* 區塊微亮底色 */
+            --border-color: #e2e8f0;    /* 線條顏色 */
+            --bad-color: #ef4444;       /* 不良規範標記紅 */
+            --good-color: #10b981;      /* 優良規範標記綠 */
+        }
+
+        body {
+            font-family: "Helvetica Neue", Arial, "PingFang TC", "Heiti TC", "Microsoft JhengHei", sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 限制 A4 寬度，確保轉成 PDF 時不跑版 */
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 40px 30px;
+        }
+
+        /* 頁首樣式 */
+        header {
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 35px;
+        }
+
+        .conference-badge {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            font-size: 0.85rem;
+            font-weight: bold;
+            padding: 4px 12px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 1.65rem;
+            margin: 0 0 10px 0;
+            font-weight: 700;
+        }
+
+        .authors {
+            font-size: 1rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        /* 區塊通用樣式 */
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 12px;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        /* 摘要專用樣式 */
+        .abstract-box {
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 22px 25px;
+            text-align: justify;
+            font-size: 0.95rem;
+        }
+
+        /* Prompt 規範區塊佈局 */
+        .prompt-section {
+            margin-top: 25px;
+        }
+
+        .prompt-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .badge {
+            font-size: 0.8rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: white;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .badge.bad { background-color: var(--bad-color); }
+        .badge.good { background-color: var(--good-color); }
+
+        /* 程式碼區塊樣式（模擬 Minted 效果） */
+        pre {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            padding: 18px;
+            border-radius: 8px;
+            font-family: "Consolas", "Courier New", monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            overflow-x: auto;
+            border: 1px solid #1e293b;
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+
+        .caption {
+            font-size: 0.85rem;
+            color: #64748b;
+            text-align: center;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        /* 頁尾聯絡資訊 */
+        footer {
+            margin-top: 50px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        /* 針對 PDF 列印優化 */
+        @media print {
+            .container { padding: 20px; }
+            section { page-break-inside: avoid; } /* 避免區塊文字被腰斬截斷 */
+            pre { white-space: pre-wrap; word-wrap: break-word; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="conference-badge">TCSE 2026 Poster Summary and Supplementary Material</div>
+        <h1>透過大型語言模型進行語意萃取與程式碼生成以實現跨架構移植與最佳化之初步研究</h1>
+        <div class="authors">國立中央大學資訊工程學系 田敬暘、莊永裕</div>
+    </header>
+
+    <section>
+        <h2>論文摘要 (Abstract)</h2>
+        <div class="abstract-box">
+            將固定長度之內建函式（如 ARM NEON Intrinsics）移植至支援可變向量長度之架構（如 RISC-V Vector, RVV）時，常存在轉換成本與效能瓶頸。現有靜態轉換工具難以精確映射指令，而僅使用大型語言模型（LLM）進行轉換，則易因硬體架構差異而生成非預期之程式碼。為此，我們初步研究探討運用 LLM 將 ARM NEON 轉換為 RVV 組合語言之移植可行性。本研究以 256 &times; 256 矩陣乘法為測試案例，設計「基準測試 (直接翻譯)」與「兩階段轉換（語意萃取與生成）」兩種實驗模式，以評估模型生成程式碼之正確性，以及導入「語意規範」對執行效能之影響。實驗針對 Claude-Opus-4.7、Gemini-3.1-Pro-Preview 與 Gemma-4-31B-it進行評估。數據顯示，五輪測試下受測大參數模型在基準測試雖可達 100% 之編譯執行成功率和計算數值正確性，但生成之程式碼存在指令冗餘與快取未命中率偏高現象。在導入語意規範後，能引導 LLM 利用 RVV 之特性（如調整 LMUL），使執行指令數與快取效能獲得改善，同時增強小參數模型在程式碼生成上之編譯執行成功率和計算數值正確性。本研究初步提出一種跨架構移植之輔助流程，未來將擴展演算法測試案例，並結合 MLIR、人機協作與實體硬體驗證，進一步評估 LLM 於底層編譯任務之適用性。
+        </div>
+    </section>
+
+    <section>
+        <h2>補充材料：實驗 Prompt 語意規範對比</h2>
+        <p style="font-size: 0.95rem; color: #64748b; margin-top: -5px;">
+            下方展示了本研究中設計的兩種語意規範提示詞（Prompt）。
+        </p>
+
+        <div class="prompt-section">
+            <div class="prompt-title">
+                <span class="badge bad">提示詞 A</span> 不良語意規範 (Structured English Format)
+            </div>
+<pre><code>[LLMSemTrans-MatMul-DSL Specification]
+
+You must extract the logic from the ARM NEON code into the following Structured English format. 
+
+### 1. Structure
+Divide the output into three clear sections:
+* **[Hardware Context]**: Describe the RVV hardware state.
+* **[Interface]**: List the memory pointers and registers involved.
+* **[Compute Logic]**: Describe the step-by-step actions using ONLY the allowed Action Verbs.
+
+### 2. Syntax Rules
+* **Variables:** Must be prefixed to show their location: `%ptr_` (Memory), `%v_` (Vector Register), `%s_` (Scalar Register).
+* **Comments:** Add original ARM intrinsics in parentheses at the end of the sentence.
+
+### 3. Allowed Action Verbs
+You may ONLY construct sentences using these 5 verb patterns:
+1. **LOAD** contiguous memory from `%ptr` into `%v_reg`.
+2. **STORE** `%v_reg` contiguously into memory at `%ptr`.
+3. **BROADCAST** value `X` into `%v_reg`.
+4. **EXTRACT** lane `X` from `%v_reg` into `%s_reg`.
+5. **MAC** (Multiply-Accumulate) vector `%v_src` and scalar `%s_src` into `%v_acc`.
+
+---
+
+### 4. Few-Shot Example
+
+**[Input: ARM NEON Snippet]**
+```c
+float32x4_t a_row = vld1q_f32(A + i * 4); 
+float32x4_t c_row = vmulq_laneq_f32(b0, a_row, 0);
+c_row = vmlaq_laneq_f32(c_row, b1, a_row, 1);
+
+
+**[Output: LLMSemTrans-DSL]**
+
+[Hardware Context]
+Set Vector Length to 4, Element Width to e32, and LMUL to m1.
+
+[Interface]
+Inputs: Memory %ptr_A, Vector %v_b0, Vector %v_b1
+Outputs: Vector %v_c_acc
+
+[Compute Logic]
+Step 1: LOAD contiguous memory from %ptr_A into %v_a_row. (vld1q_f32)
+Step 2: EXTRACT lane 0 from %v_a_row into %s_a0.
+Step 3: BROADCAST 0.0 into %v_c_acc to initialize.
+Step 4: MAC vector %v_b0 and scalar %s_a0 into %v_c_acc. (vmulq_laneq_f32)
+Step 5: EXTRACT lane 1 from %v_a_row into %s_a1.
+Step 6: MAC vector %v_b1 and scalar %s_a1 into %v_c_acc. (vmlaq_laneq_f32)</code></pre>
+            <div class="caption">圖 1: 不良語意規範 (缺乏編譯優化引導)</div>
+        </div>
+
+        <div class="prompt-section" style="margin-top: 35px;">
+            <div class="prompt-title">
+                <span class="badge good">提示詞 B</span> 優良語意規範 (JSON 格式且內含硬體感知與編譯器優化指引)
+            </div>
+<pre><code># [LLMSemTrans Semantic Extractor Engine]
+
+You are an expert compiler engineer and the execution engine for the `extract_rvv_semantics` function. Your task is to parse ARM NEON source code and return a hardware-agnostic semantic specification strictly optimized for RISC-V Vector (RVV) generation.
+
+### [OUTPUT FORMAT SPECIFICATION]
+
+You MUST output ONLY a valid JSON object. This JSON serves as the blueprint for the next compilation stage. Follow this template strictly and implement the optimization logic described in the comments. You must consider the following optimization.
+
+```jsonc
+{
+  "original_hardware_context": {
+    "VL": 4,           // Vector Length
+    "SEW": "e32",      // Standard Element Width (e.g., e8, e16, e32, e64)
+    "LMUL": "m1"       // Length Multiplier (m1, m2, m4, m8).
+  },
+  "memory_interface": {
+    "inputs": [
+      { "name": "ptr_A", "layout": "Row-Major Matrix" }
+    ],
+    "outputs": [
+      { "name": "ptr_C", "layout": "Row-Major Matrix" }
+    ]
+  },
+  "compute_strategy": {
+    /**
+    * LMUL GROUPING:
+    * Must change the optimal LMUL (2, 4, 8) based on register pressure.
+    * Higher LMUL reduces instruction overhead but consumes more registers.
+    */
+    "vector_grouping_strategy": {
+      "lmul": string,        // e.g., "m2" "m4" "m8"
+      "reason": string,      // e.g., "To avoid spilling 32 accumulators"
+    },
+    /**
+    * REGISTER PROMOTION:
+    * Specify which input memory blocks MUST be pre-loaded into vector registers 
+    * to be reused across the entire kernel execution (to eliminate redundant loads).
+    */
+    "register_promotion": {
+      "target_data": "e.g., Matrix B rows 0-3",
+      "vector_registers": "e.g., v8-v11",
+    },
+    /**
+    * VECTOR-SCALAR SYNERGY:
+    * Explicitly identify elements to be loaded as SCALARS to drive vfmul.vf/vfmacc.vf.
+    */
+    "scalar_operand_strategy": "e.g., Direct scalar load from ptr_A into ft0-ft3 to drive vfmacc.vf",
+    /**
+    * LOOP UNROLLING:
+    * Mandatory decision on the unroll factor to eliminate branch overhead.
+    */
+    "loop_optimization": {
+      "unrolling_factor": "x4",
+      "interleaving_plan": "e.g., Interleave scalar loads with vfmacc to hide memory latency"
+    },
+    /**
+    * TAIL/MASK POLICIES:
+    * Use 'ta' (tail-agnostic) for intermediate calculations to boost OOO performance.
+    */
+    "vtype_policy": {
+      "tail": "agnostic",
+      "mask": "agnostic"
+    },
+    /**
+    * MEMORY SAFETY (ANTI-SEGFAULT):
+    * Standard safety rules to prevent pointer corruption.
+    */
+    "memory_safety_directives": []
+  }
+}
+```
+
+### Execution Constraints 
+
+# Enforce_register_blocking
+- Fails if the strategy does not identify data reuse opportunities.
+- MUST mandate keeping reused data (like Matrix B) in vector registers (Register Promotion).
+
+# Enforce_rvv_scalar_vector_synergy
+- RVV excels at vector-scalar ops.
+- Fails if memory is loaded into a vector just to extract a single scalar.
+- MUST use "Direct Scalar Load" for shared elements.
+
+# Prioritize_full_unrolling
+- Fails if unrolling is not explicitly planned for fixed-size kernels (e.g., 4x4).
+- MUST analyze independent ops and specify a factor (x2, x4, etc.) to minimize branch overhead.
+
+# Enforce_memory_safety
+- Fails if pointer increments are hardcoded.
+- MUST mandate dynamic offsets (vl * SEW/8) and base pointer preservation (using t0-t6).
+
+### [USER INPUT]
+
+**Execute `extract_rvv_semantics` for the following ARM NEON code:**
+
+```c
+{USER_ARM_NEON_CODE_HERE}
+```
+
+**Final Reminder: Output ONLY the JSON object. No conversational text.**
+```</code></pre>
+            <div class="caption">圖 2: 優良語意規範 (結構化 JSON 暨編譯優化引導)</div>
+        </div>
+    </section>
+
+    <footer>
+        <p>台灣軟體工程研討會 (TCSE 2026) 海報論文補充材料</p>
+        <p>國立中央大學 資訊工程學系</p>
+    </footer>
+</div>
+
+</body>
+</html>
