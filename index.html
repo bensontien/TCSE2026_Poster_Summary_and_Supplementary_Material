@@ -182,6 +182,14 @@
     </section>
 
     <section>
+        <h2>實驗設計</h2>
+        <div style="text-align: center; margin: 25px 0;">
+            <img src="step.png" alt="實驗設計" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); padding: 5px; background: #ffffff;">
+            <div class="caption" style="margin-top: 12px; margin-bottom: 0;">圖 1: 生成流程</div>
+        </div>
+    </section>
+
+    <section>
         <h2>補充材料：實驗 Prompt 語意規範對比</h2>
         <p style="font-size: 0.95rem; color: #64748b; margin-top: -5px;">
             下方展示了本研究中設計的兩種語意規範提示詞（Prompt）。
@@ -240,7 +248,7 @@ Step 3: BROADCAST 0.0 into %v_c_acc to initialize.
 Step 4: MAC vector %v_b0 and scalar %s_a0 into %v_c_acc. (vmulq_laneq_f32)
 Step 5: EXTRACT lane 1 from %v_a_row into %s_a1.
 Step 6: MAC vector %v_b1 and scalar %s_a1 into %v_c_acc. (vmlaq_laneq_f32)</code></pre>
-            <div class="caption">圖 1: 不良語意規範 (缺乏編譯優化引導)</div>
+            <div class="caption">圖 2: 不良語意規範 (缺乏編譯優化引導)</div>
         </div>
 
         <div class="prompt-section" style="margin-top: 35px;">
@@ -348,7 +356,7 @@ You MUST output ONLY a valid JSON object. This JSON serves as the blueprint for 
 
 **Final Reminder: Output ONLY the JSON object. No conversational text.**
 ```</code></pre>
-            <div class="caption">圖 2: 優良語意規範 (結構化 JSON 暨編譯優化引導)</div>
+            <div class="caption">圖 3: 優良語意規範 (結構化 JSON 暨編譯優化引導)</div>
         </div>
     </section>
 
