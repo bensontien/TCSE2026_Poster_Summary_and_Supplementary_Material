@@ -31,7 +31,7 @@
             padding: 40px 20px; /* 稍微縮小內襯，留給手機螢幕更多空間 */
         }
 
-        /* 當螢幕寬度小於 768px（手機）時的優化 */
+        /* 當螢幕寬度小於 768px（手機）時的最佳化 */
         @media (max-width: 768px) {
             h1 {
                 font-size: 1.4rem; /* 讓題目在手機上不會太大而折行太多 */
@@ -157,7 +157,7 @@
             color: #64748b;
         }
 
-        /* 針對 PDF 列印優化 */
+        /* 針對 PDF 列印最佳化 */
         @media print {
             .container { padding: 20px; }
             section { page-break-inside: avoid; } /* 避免區塊文字被腰斬截斷 */
@@ -248,7 +248,7 @@ Step 3: BROADCAST 0.0 into %v_c_acc to initialize.
 Step 4: MAC vector %v_b0 and scalar %s_a0 into %v_c_acc. (vmulq_laneq_f32)
 Step 5: EXTRACT lane 1 from %v_a_row into %s_a1.
 Step 6: MAC vector %v_b1 and scalar %s_a1 into %v_c_acc. (vmlaq_laneq_f32)</code></pre>
-            <div class="caption">圖 2: 不良語意規範 (缺乏編譯優化引導)</div>
+            <div class="caption">圖 2: 不良語意規範 (缺乏編譯最佳化引導)</div>
         </div>
 
         <div class="prompt-section" style="margin-top: 35px;">
@@ -356,7 +356,7 @@ You MUST output ONLY a valid JSON object. This JSON serves as the blueprint for 
 
 **Final Reminder: Output ONLY the JSON object. No conversational text.**
 ```</code></pre>
-            <div class="caption">圖 3: 優良語意規範 (結構化 JSON 暨編譯優化引導)</div>
+            <div class="caption">圖 3: 優良語意規範 (結構化 JSON 暨編譯最佳化引導)</div>
         </div>
     </section>
 
